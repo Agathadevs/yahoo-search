@@ -1,3 +1,5 @@
+import random
+import csv
 from selectolax.lexbor import LexborHTMLParser
 import httpx
 
@@ -15,8 +17,6 @@ from urllib.parse import (
     unquote_plus,
     unquote
 )
-import random
-import csv
 
 headers = {
     "User-Agent": (
@@ -25,7 +25,9 @@ headers = {
         "(Edition GX-CN)"
     )
 }
+
 def search_news(query:str) -> dict:
+
     """search news from yahoo.
 
     Args:
@@ -71,7 +73,7 @@ def search_news(query:str) -> dict:
                 )
             )
         )
-        
+
         title_=i.css("h3 a")[0].text()
         context_=i.css("p")[0].text()
         thumbnail_=i.css("img")[0].attributes["src"]
@@ -85,8 +87,11 @@ def search_news(query:str) -> dict:
             
         context.update(**new_context)
         result.append(context)
+
     return News(result=result)
+
 def weather_search(nation:str,city:str,town:str) -> dict:
+
     """search weather from ur location.
 
     Args:
@@ -100,6 +105,7 @@ def weather_search(nation:str,city:str,town:str) -> dict:
     """
     locate=[]
     weather={}
+
     csv_file=open('woeid.csv', 'r',encoding="utf-8")
     data = csv.DictReader(csv_file)  
 
@@ -135,8 +141,6 @@ def weather_search(nation:str,city:str,town:str) -> dict:
             WOEID
             )
         )
-
-
 
 def weather():
     ...
