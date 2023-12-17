@@ -71,6 +71,7 @@ def search_news(query:str) -> dict:
                 )
             )
         )
+        
         title_=i.css("h3 a")[0].text()
         context_=i.css("p")[0].text()
         thumbnail_=i.css("img")[0].attributes["src"]
@@ -108,6 +109,7 @@ def weather_search(nation:str,city:str,town:str) -> dict:
             WOEID=location["woeid"]
 
     if nation=="taiwan":
+
         client=httpx.Client(
         )
         response=client.get(
@@ -119,7 +121,9 @@ def weather_search(nation:str,city:str,town:str) -> dict:
             WOEID
             )
         )
+
     else:
+
         client=httpx.Client(
         )
         response=client.get(
