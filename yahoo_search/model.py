@@ -11,11 +11,15 @@ class SearchNews(BaseModel):
 class News(BaseModel):
     result:List[SearchNews]
     
-class WeathersResult(BaseModel):
-    link:str
-
-class Weather(BaseModel):
-    ...
+class WeatherInformtion(BaseModel):
+    locate:str
+    city:str
+    now:str
+    status:str
+    temperature_Celsius:str
+    temperature_Fahrenheit:str
+    highest_temperature:str
+    lowest_temperature:str
 
 class Videos(BaseModel):
     link:str

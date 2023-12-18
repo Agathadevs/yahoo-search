@@ -1,7 +1,9 @@
 from .core import (
-    search_news
+    search_news,
+    weather
 )
 
 __all__=[
-    "search_news"
+    "search_news",
+    "weather"
 ]
