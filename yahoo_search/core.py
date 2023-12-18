@@ -57,13 +57,10 @@ def search_news(query:str) -> SearchNews:
 
     response=client.get("https://tw.news.yahoo.com/search?p={}&fr=uh3_news_web&fr2=p%3Anews%2Cm%3Asb&.tsrc=uh3_news_web".format(quote_plus(query)),
                       headers=headers  )
-    
     response_html=LexborHTMLParser(response.text)
 
     result=[]
     context={}
-
-    all_element=response_html.body.css("div.StreamContainer ul li")
     
     for i in response_html.body.css("div.StreamContainer ul li"):
         
@@ -148,6 +145,7 @@ def weather_search(nation:str,city:str,town:str) -> dict:
         )
 
 def weather() -> WeatherInformtion:
+
     """serach weather from yahoo.
 
     example:
@@ -175,6 +173,7 @@ def weather() -> WeatherInformtion:
             WeatherInformation: ther information of weather.
     """
     client=httpx.Client()
+
     response=client.get("https://tw.news.yahoo.com/weather/",
                         headers=headers)
     response_html=LexborHTMLParser(response.text)
@@ -187,6 +186,7 @@ def weather() -> WeatherInformtion:
     weather_status=response_html.css_first("div.My\(2px\).Px\(2px\).D\(f\).Ai\(c\) p").text()
     highest_temperature=response_html.css("div.My\(2px\) span.D\(n\)")[0].text()
     lowest_temperature=response_html.css("div.My\(2px\) span.D\(n\)")[1].text()
+
     Meteorological_information={
         "locate":f"{nation}",
         "city":city,
