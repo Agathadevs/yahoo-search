@@ -1,16 +1,14 @@
 from pydantic import BaseModel
 from typing import Dict,Optional,List
 
+class WeatherForecast(BaseModel):
+    day:str
+    weather_img_url:str
+    rainfall_img:str
+    rainfall_chance:str
+    highest_temperature:str
+    lowest_temperature:str
 
-class SearchNews(BaseModel):
-    source:str
-    title:Optional[str]=None
-    context:Optional[str]=None
-    thumbnail:Optional[str]=None
-
-class News(BaseModel):
-    result:List[SearchNews]
-    
 class WeatherInformtion(BaseModel):
     locate:str
     city:str
@@ -21,8 +19,17 @@ class WeatherInformtion(BaseModel):
     highest_temperature:str
     lowest_temperature:str
 
-class Videos(BaseModel):
-    link:str
+class Weather(BaseModel):
+    result:Dict[WeatherForecast]
 
-class search(BaseModel):
+class SearchNews(BaseModel):
+    source:str
+    title:Optional[str]=None
+    context:Optional[str]=None
+    thumbnail:Optional[str]=None
+
+class News(BaseModel):
+    result:List[SearchNews]
+
+class Videos(BaseModel):
     link:str

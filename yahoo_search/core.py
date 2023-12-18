@@ -4,9 +4,12 @@ from selectolax.lexbor import LexborHTMLParser
 import httpx
 
 from .model import (
+    SearchReasult,
+    Search,
     WeatherInformtion,
+    WeatherForecast,
+    Weather,
     SearchNews,
-    search,
     Videos,
     News
 )
@@ -25,6 +28,9 @@ headers = {
         "(Edition GX-CN)"
     )
 }
+
+def search(query:str) -> SearchReasult:
+    ...
 
 def search_news(query:str) -> SearchNews:
 
@@ -198,4 +204,70 @@ def weather() -> WeatherInformtion:
         "lowest_temperature":str(lowest_temperature)  
     }
     
-    return WeatherInformtion(**Meteorological_information)    
+    return WeatherInformtion(**Meteorological_information)   
+
+def weather_forecast() :
+    """search weather forecast from yahoo.
+
+    example:
+        .. code-block :: python
+
+            import yahoo_search
+            print(core.weather_forecast().result.[0])
+            >>> WeatherSearch(
+                    day='星期一',
+                    weather_img_url='https://s.yimg.com/os/weather/1.0.1/shadow_icon/60x60/rain_day_night@2x.png',
+                    rainfall_img='https://s.yimg.com/os/weather/1.0.1/precipitation/54x60/rain_ico_60@2x.png',
+                    rainfall_chance='66%',
+                    highest_temperature='23°C',
+                    lowest_temperature='17°C'
+                ) 
+    Returns:
+        WeatherSearch:weather Forecast from yahoo weather
+    """
+    client=httpx.Client()
+
+    response=client.get("https://tw.news.yahoo.com/weather/",
+                        headers=headers)
+    response_html=LexborHTMLParser(response.text)
+
+    text_=response_html.css_first("div.Miw\(0\) table")
+
+    result=[]
+  
+    for i in text_.css("tbody tr.Bdb"):
+        
+        all_=i.css("td")
+
+        day=all_[0].text()[10:13]
+
+        weather_img_url=all_[1].css_first("img").attributes["data-wf-src"]
+   
+        rainfall_img=all_[2].css_first("img").attributes["data-wf-src"]
+
+        rainfall_chance=all_[2].css_first("dl dd").text()
+
+        highest_temperature=str(all_[3].css_first("dl dd.D\(n\)").text())+"C"
+
+        lowest_temperature=str(all_[3].css_first("dl dd.Pstart\(10px\).celsius_D\(b\)").text())+"C"
+
+        if (
+            day,
+            weather_img_url,
+            rainfall_img,
+            rainfall_chance,
+            highest_temperature,
+            lowest_temperature
+        ):
+            forecast={
+                "day":day,
+                "weather_img_url": weather_img_url,
+                "rainfall_img":rainfall_img,
+                "rainfall_chance":rainfall_chance,
+                "highest_temperature":highest_temperature,
+                "lowest_temperature":lowest_temperature
+            }
+
+        result.append(forecast)
+
+    return Weather(result=result)
