@@ -144,7 +144,7 @@ def search_news(query:str) -> SearchNews:
             )
 
     Returns: 
-    
+
         SearchNews:result of search news.
 
     """            
@@ -203,7 +203,6 @@ def weather_search(nation:str,city:str,town:str) -> WeatherSearch:
 
         WeatherSearch
 
-    
     """
     locate=[]
     weather={}
