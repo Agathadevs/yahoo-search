@@ -144,6 +144,7 @@ def search_news(query:str) -> SearchNews:
             )
 
     Returns: 
+    
         SearchNews:result of search news.
 
     """            
@@ -199,7 +200,9 @@ def weather_search(nation:str,city:str,town:str) -> WeatherSearch:
         :town(str):your town name
 
     Returns:
+
         WeatherSearch
+
     
     """
     locate=[]
@@ -313,7 +316,9 @@ def weather() -> WeatherInformtion:
             >>> "台北市"
 
         Returns:
+
             WeatherInformation: ther information of weather.
+
     """
     client=httpx.Client()
 
@@ -364,7 +369,9 @@ def weather_forecast() -> WeatherForecast:
                     lowest_temperature='17°C'
                 ) 
     Returns:
+
         WeatherSearch:weather Forecast from yahoo weather
+
     """
     client=httpx.Client()
 
@@ -422,8 +429,28 @@ def video_search(query:str) -> Videos:
     Args:
         :query(str): query
 
+    example:
+        .. code-block :: python
+
+            import yahoo_search
+            print(core.video_search().result)
+            >>> {
+                'thumbnail': 'https://tse4.mm.bing.net/th?id=OVP.XI0BgtdPC2DVVtuBu0NxBQEsDh&pid=Api&h=225&w=300&c=7&rs=1', 
+                'time': '1 year ago', 'title': 'Functions in Python | Python Tutorial - Day #20',
+                'Videolink': 'https://tse2.mm.bing.net/th?id=OM.DyEInu7xxvxoQw_1673053825&pid=Api', 
+                'source': 'youtube.com', 
+                'url': "https://tw.video.search.yahoo.com/video/play;_ylt=Awr4.sTd2oZlfd42VLf7w8QF"
+                       ";_ylu=c2VjA3NyBHNsawN2aWQEZ3BvcwM2MA--?p=python&vid=e2518dd0f7270b55b6f23f"
+                       "a192138a5e&turl=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOVP.XI0BgtdPC2D"
+                       "VVtuBu0NxBQEsDh%26pid%3DApi%26h%3D225%26w%3D300%26c%3D7%26rs%3D1&rurl=http"
+                       "s%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdyvxxJSGUsE&tit=Functions+in+%3Cb%"
+                       "3EPython%3C%2Fb%3E+%7C+%3Cb%3EPython%3C%2Fb%3E+Tutorial+-+Day+%2320&c=59&s"
+                       "igr=m3WiW5Ic5GLW&sigt=nS4ye7iIuDdm&sigi=H19md7fl6UW2&fr=p%3As%2Cv%3Av&h=22"
+                       "5&w=300&l=978&age=1671276610&fr=sfp&tt=b'
+                }
     Returns:
-        Videos
+
+        Videos : video search from yahoo
     
     """
     client=httpx.Client()
