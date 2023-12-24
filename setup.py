@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name = "yahoo_search",                                                                                                                              
+    name = "yahoosearcher-py",                                                                                                                              
     version = "0.0.1",
     author = "Cheng",
     license='MIT license',

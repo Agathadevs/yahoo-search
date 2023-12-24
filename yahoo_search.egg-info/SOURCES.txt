@@ -1,8 +1,0 @@
-README.md
-setup.py
-yahoo_search/__init__.py
-yahoo_search/core.py
-yahoo_search.egg-info/PKG-INFO
-yahoo_search.egg-info/SOURCES.txt
-yahoo_search.egg-info/dependency_links.txt
-yahoo_search.egg-info/top_level.txt
